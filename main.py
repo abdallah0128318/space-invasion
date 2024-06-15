@@ -1,6 +1,6 @@
 import sys
 from time import sleep
-import pygame
+import pygame, asyncio
 from settings import Settings
 from game_stats import GameStats
 from scoreboard import Scoreboard
@@ -32,7 +32,7 @@ class AlienInvasion:
         # Set the background color.
         self.bg_color = (230, 230, 230)
 
-    def run_game(self):
+    async def run_game(self):
     # """Start the main loop for the game."""
         while True:
         # Watch for keyboard and mouse events.
@@ -43,6 +43,7 @@ class AlienInvasion:
                 self._update_aliens()
             # Redraw the screen during each pass through the loop.
             self._update_screen()
+            await asyncio.sleep(0)
 
     def _check_events(self):
 # """Respond to keypresses and mouse events."""
@@ -238,4 +239,4 @@ class AlienInvasion:
 if __name__ == '__main__':
 # Make a game instance, and run the game.
     ai = AlienInvasion()
-    ai.run_game()
+    asyncio.run(ai.run_game())
